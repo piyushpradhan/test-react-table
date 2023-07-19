@@ -9,16 +9,21 @@ function App() {
 
   let columns = [
     {
+      id: "firstName",
       accessorKey: "firstName",
       header: "First Name",
+      type: "text",
       cell: info => info.getValue()
     },
     {
+      id: "lastName",
       accessorKey: "lastName",
       header: "Last Name",
+      type: "text",
       cell: info => info.getValue()
     },
     {
+      id: "info",
       accessorKey: "info",
       header: "Info",
       type: "link",
@@ -32,19 +37,17 @@ function App() {
         ...acc,
         {
           ...header,
-          columns: appState.expandedChecklist[header.accessorKey]
-            ? getEmbeddedColumns({ columnId: header.accessorKey })
-            : []
+          type: appState.expandedChecklist[header.accessorKey]
+            ? "embedded"
+            : "link"
         }
       ];
     }
     return [...acc, header];
   }, []);
 
-  console.log({ expandedChecklist: appState.expandedChecklist });
-  console.log({ columns });
-
   const data = React.useMemo(() => makeData, []);
+
   return (
     <>
       <h1>React table testing</h1>

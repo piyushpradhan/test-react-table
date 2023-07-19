@@ -2,22 +2,22 @@ import { createContext, useState, useContext } from "react";
 
 const initialState = {
   expandedChecklist: {},
+  expandedEmbeddedRows: {},
   checklist: {
     info: [
       {
-        accessorFn: row => row.info.age,
-        header: "Age",
-        cell: info => info.getValue()
+        id: "friend",
+        accessorFn: row => row["info-firstName"],
+        header: "Friend",
+        type: "text",
+        cell: cell => cell.getValue()
       },
       {
-        accessorFn: row => row.info.type,
-        header: "Type",
-        cell: info => info.getValue()
-      },
-      {
-        accessorFn: row => row.info.music,
-        header: "Music",
-        cell: info => info.getValue()
+        id: "phone",
+        accessorFn: row => row["info-phone"],
+        header: "Phone",
+        type: "text",
+        cell: cell => cell.getValue()
       }
     ]
   }
@@ -43,12 +43,46 @@ export function AppProvider({ children }) {
     return appState.checklist[columnId] || [];
   };
 
+  const toggleEmbeddedFieldsExpansion = ({
+    instanceId,
+    columnId,
+    maxRows,
+    index
+  }) => {
+    setAppState(prev => ({
+      ...prev,
+      expandedEmbeddedRows: {
+        ...prev.expandedEmbeddedRows,
+        [instanceId]: {
+          ...prev.expandedEmbeddedRows?.[instanceId],
+          [index]: {
+            ...prev.expandedEmbeddedRows?.[instanceId]?.[index],
+            [columnId]:
+              !prev.expandedEmbeddedRows?.[instanceId]?.[columnId] ?? true,
+            maxRows
+          }
+        }
+      }
+    }));
+  };
+
+  const getMaxRows = ({ instanceId, index }) => {
+    return appState.expandedEmbeddedRows?.[instanceId]?.[index]?.maxRows ?? 1;
+  };
+
+  const getIsExpanded = ({ instanceId, columnId }) => {
+    return appState.expandedEmbeddedRows[instanceId]?.[columnId];
+  };
+
   return (
     <AppContext.Provider
       value={{
         appState,
         expandHorizontally,
-        getEmbeddedColumns
+        getEmbeddedColumns,
+        getMaxRows,
+        toggleEmbeddedFieldsExpansion,
+        getIsExpanded
       }}
     >
       {children}
