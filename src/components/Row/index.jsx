@@ -6,7 +6,13 @@ const RowItem = ({ cell, row }) => {
     case "text":
     case "link":
       return (
-        <td>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+        <td
+          style={{
+            borderRight: "1px solid white"
+          }}
+        >
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </td>
       );
     case "embedded":
       return <LinkedField cell={cell} row={row} />;

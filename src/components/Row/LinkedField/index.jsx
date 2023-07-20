@@ -6,17 +6,28 @@ const LinkedField = ({ row }) => {
   const linkedField = Object.values(row.original.info);
   return (
     <td>
-      <table
-        style={{
-          borderCollapse: "collapse"
-        }}
-      >
-        <tbody>
+      <table>
+        <tbody
+          style={{
+            width: "100%"
+          }}
+        >
           {linkedField
             .slice(0, isRowExpanded ? linkedField.length : 1)
             .map((value, index) => (
-              <tr key={index}>
-                <th>
+              <tr
+                key={index}
+                style={{
+                  borderTop: index !== 0 && "1px solid white"
+                }}
+              >
+                <th
+                  colSpan={1}
+                  style={{
+                    width: "120px",
+                    borderRight: "1px solid white"
+                  }}
+                >
                   {value.firstName}{" "}
                   {linkedField.length > 1 && (
                     <a

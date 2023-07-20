@@ -3,24 +3,7 @@ import { createContext, useState, useContext } from "react";
 const initialState = {
   expandedChecklist: {},
   expandedEmbeddedRows: {},
-  checklist: {
-    info: [
-      {
-        id: "friend",
-        accessorFn: row => row["info-firstName"],
-        header: "Friend",
-        type: "text",
-        cell: cell => cell.getValue()
-      },
-      {
-        id: "phone",
-        accessorFn: row => row["info-phone"],
-        header: "Phone",
-        type: "text",
-        cell: cell => cell.getValue()
-      }
-    ]
-  }
+  checklist: {}
 };
 
 const AppContext = createContext();

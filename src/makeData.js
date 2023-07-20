@@ -1,4 +1,23 @@
 const data = {
+  fields: {
+    byId: {
+      firstName: {
+        type: "text"
+      },
+      phone: {
+        type: "text"
+      },
+      email: {
+        type: "text"
+      },
+      info: {
+        type: "link"
+      },
+      hobbies: {
+        type: "text"
+      }
+    }
+  },
   data: [
     {
       ID: "83400b35-4f96-4e87-bde9-359856b9182b",

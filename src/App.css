@@ -6,7 +6,8 @@
 }
 
 table {
-  border-collapse: "collapse";
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .logo {
