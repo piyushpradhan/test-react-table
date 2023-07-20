@@ -5,7 +5,7 @@ import makeData from "./makeData";
 import { useAppContext } from "./store/store";
 
 function App() {
-  const { appState, getEmbeddedColumns } = useAppContext();
+  const { appState } = useAppContext();
 
   let columns = [
     {

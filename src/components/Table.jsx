@@ -15,7 +15,6 @@ export default function Table({ columns, data }) {
     getCoreRowModel: getCoreRowModel()
   });
 
-  console.log({ appState });
   const handleHorizontalExpansion = ({ columnId }) => {
     if (columnId === "info") {
       expandHorizontally({ columnId });

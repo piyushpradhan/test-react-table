@@ -26,7 +26,7 @@ const data = {
         12426: {
           firstName: "Eileen",
           phone: ["+911223344045", "+449984554321", "+449583934321"],
-          hobbies: ["cricket"]
+          hobbies: ["cricket", "writing", "reading"]
         },
         12427: {
           firstName: "Ludwig",
@@ -34,7 +34,7 @@ const data = {
         },
         12428: {
           firstName: "Willow",
-          phone: ["+911223344331"],
+          phone: ["+911223344331", "+449583933321"],
           hobbies: ["dancing"]
         }
       },

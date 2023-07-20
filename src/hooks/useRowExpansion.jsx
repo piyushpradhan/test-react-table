@@ -23,8 +23,6 @@ export default function useRowExpansion({ instanceId, columnId }) {
       maxRows: Math.max(fieldMax, currentMaxRows),
       index
     });
-
-    console.log({ expanded: appState.expandedEmbeddedRows });
   };
 
   const isRowExpanded = getIsExpanded({ instanceId, columnId });
