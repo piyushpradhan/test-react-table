@@ -29,8 +29,18 @@ const LinkedField = ({ row }) => {
                     </a>
                   )}
                 </th>
-                <EmbeddedField value={value.phone ?? []} index={index} />
-                <EmbeddedField value={value.hobbies ?? []} index={index} />
+                <EmbeddedField
+                  value={value.phone ?? []}
+                  index={index}
+                  isRowExpanded={isRowExpanded}
+                  setIsRowExpanded={setIsRowExpanded}
+                />
+                <EmbeddedField
+                  value={value.hobbies ?? []}
+                  index={index}
+                  isRowExpanded={isRowExpanded}
+                  setIsRowExpanded={setIsRowExpanded}
+                />
               </tr>
             ))}
         </tbody>

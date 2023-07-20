@@ -39,6 +39,10 @@ export function AppProvider({ children }) {
     }));
   };
 
+  const getIsExpandedHorizontally = ({ columnId }) => {
+    return appState.expandedChecklist[columnId];
+  };
+
   const getEmbeddedColumns = ({ columnId }) => {
     return appState.checklist[columnId] || [];
   };
@@ -79,6 +83,7 @@ export function AppProvider({ children }) {
       value={{
         appState,
         expandHorizontally,
+        getIsExpandedHorizontally,
         getEmbeddedColumns,
         getMaxRows,
         toggleEmbeddedFieldsExpansion,

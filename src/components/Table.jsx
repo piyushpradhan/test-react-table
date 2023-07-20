@@ -8,7 +8,7 @@ import { useAppContext } from "../store/store";
 import RowItem from "./Row";
 
 export default function Table({ columns, data }) {
-  const { appState, expandHorizontally } = useAppContext();
+  const { expandHorizontally, getIsExpandedHorizontally } = useAppContext();
   const table = useReactTable({
     columns,
     data,
@@ -36,33 +36,41 @@ export default function Table({ columns, data }) {
                 header.column.columnDef.type === "link" ||
                 header.column.columnDef.type === "embedded";
               return (
-                <th
-                  style={{
-                    borderBottom: "1px solid lightgray",
-                    borderRight: "1px solid lightgray",
-                    cursor: isLinked && "pointer",
-                    background: isLinked ? "lightgray" : "transparent",
-                    color: isLinked ? "black" : "white"
-                  }}
-                  key={header.id}
-                  colSpan={
-                    isLinked ? header.column.columnDef.columns.length : 1
-                  }
-                  onClick={() => {
-                    if (isLinked) {
-                      handleHorizontalExpansion({
-                        columnId: header.column.id
-                      });
+                <td key={header.id}>
+                  <th
+                    style={{
+                      borderBottom: "1px solid lightgray",
+                      borderRight: "1px solid lightgray",
+                      cursor: isLinked && "pointer",
+                      background: isLinked ? "lightgray" : "transparent",
+                      color: isLinked ? "black" : "white"
+                    }}
+                    colSpan={
+                      getIsExpandedHorizontally({
+                        columnId: header.column.columnDef.id
+                      })
+                        ? header.column.columnDef.columns.length
+                        : 1
                     }
-                  }}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
+                    onClick={() => {
+                      if (isLinked) {
+                        handleHorizontalExpansion({
+                          columnId: header.column.id
+                        });
+                      }
+                    }}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </th>
+                  {getIsExpandedHorizontally({
+                    columnId: header.column.columnDef.id
+                  }) && <th>embedded fields</th>}
+                </td>
               );
             })}
           </tr>
